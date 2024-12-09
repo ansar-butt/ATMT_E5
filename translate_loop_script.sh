@@ -1,4 +1,4 @@
-for ((i = 3 ; i < 25 ; i = i + 3 )); do 
+for ((i = 3 ; i < 4 ; i = i + 3 )); do 
     SECONDS=0
     python translate_beam.py --data data/en-fr/prepared --dicts data/en-fr/prepared --checkpoint-path assignments/03/baseline/checkpoints/checkpoint_best.pt --output assignments/03/baseline/translations.txt --beam-size $i > /dev/null 2>&1
     echo "TIME: $SECONDS"

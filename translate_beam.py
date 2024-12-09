@@ -171,11 +171,13 @@ def main(args):
                     # What would happen if we did not make this distinction?
 
                     # Store the node as final if EOS is generated
-                    if next_word[-1] == tgt_dict.eos_idx:
+                    if node.completed:
+                        continue
+                    elif next_word[-1] == tgt_dict.eos_idx:
                         node = BeamSearchNode(
                             search, node.emb, node.lstm_out, node.final_hidden,
                             node.final_cell, node.mask, torch.cat((prev_words[i][0].view([1]),
-                            next_word)), node.logp, node.length
+                            next_word)), node.logp, node.length, True
                             )
                         search.add_final(-node.eval(args.alpha), node)
 
